@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
 {
     public $accepted_currencies = [
-        'IRR', 'TOM',
+        'IRR', 'TOM', 'EUR',
     ];
 
     public $multiple = true;
@@ -22,7 +22,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
             return true;
         }
 
-        if (empty($this->payment_params->merchant)) {
+        if (empty($this->payment_params->api)) {
             $this->app->enqueueMessage('Please check your &quot;Nextpay&quot; plugin configuration');
             $do = false;
         }
@@ -38,7 +38,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
         }
         try {
             $callBackUrl = HIKASHOP_LIVE.'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment='.$this->name.'&tmpl=component&lang='.$this->locale.$this->url_itemid.'&orderID='.$order->order_id;
-            $amount = round($order->cart->full_total->prices[0]->price_value_with_tax, (int) $this->currency->currency_locale['int_frac_digits']);
+            $amount = round($order->cart->full_total->prices[0]->price_value_with_tax, (int) $this->currency->currency_locale['int_frac_digits'])/10;
             $parameters = [
                 'api_key'  => $this->payment_params->api,
                 'amount'      => $amount,
