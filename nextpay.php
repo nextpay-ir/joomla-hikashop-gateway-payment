@@ -85,7 +85,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
         if (isset($_POST['trans_id']) AND isset($_POST['order_id'])) {
             $history = new stdClass();
             $history->notified = 0;
-            $history->amount = round($dbOrder->order_full_price, (int) $this->currency->currency_locale['int_frac_digits']);
+            $history->amount = round($dbOrder->order_full_price, (int) $this->currency->currency_locale['int_frac_digits'])/10;
             $history->data = ob_get_clean();
 
             try {
