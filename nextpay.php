@@ -52,7 +52,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
 
                 return $this->showPage('end');
             } else {
-                echo "<p align=center>Bank Error $result->Status.<br />Order UNSUCCSESSFUL!</p>";
+                echo "<p align=center>Bank Error $result->code.<br />Order UNSUCCSESSFUL!</p>";
                 exit;
                 die;
             }
