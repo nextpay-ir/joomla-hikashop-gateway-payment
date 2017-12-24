@@ -39,12 +39,13 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
         try {
             $callBackUrl = HIKASHOP_LIVE.'index.php?option=com_hikashop&ctrl=checkout&task=notify&notif_payment='.$this->name.'&tmpl=component&lang='.$this->locale.$this->url_itemid.'&orderID='.$order->order_id;
             $amount = round($order->cart->full_total->prices[0]->price_value_with_tax, (int) $this->currency->currency_locale['int_frac_digits'])/10;
-            $parameters = [
+            $amount = (int) $amount;
+            $parameters = array(
                 'api_key'  => $this->payment_params->api,
                 'amount'      => $amount,
                 'order_id' => $order->order_id,
                 'callback_uri' => $callBackUrl,
-            ];
+            );
             $result = $client->TokenGenerator($parameters);
             $result = $result->TokenGeneratorResult;
             if(intval($result->code) == -1){
@@ -86,6 +87,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
             $history = new stdClass();
             $history->notified = 0;
             $history->amount = round($dbOrder->order_full_price, (int) $this->currency->currency_locale['int_frac_digits'])/10;
+            $history->amount = (int)$history->amount;
             $history->data = ob_get_clean();
 
             try {
