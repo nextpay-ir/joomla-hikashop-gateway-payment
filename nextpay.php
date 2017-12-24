@@ -52,7 +52,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
 
                 return $this->showPage('end');
             } else {
-                echo "<p align=center>Bank Error $result->code.<br />Order UNSUCCSESSFUL!</p>";
+                echo "<p align=center>خطا در گرفتن تراکنش {$result->code}.<br />سفارش ناموفق!</p>";
                 exit;
                 die;
             }
@@ -143,7 +143,7 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
             0 => "Complete Transaction",
             -1 => "Default State",
             -2 => "Bank Failed or Canceled",
-            -3 => "Bank Payment Pendding",
+            -3 => "Bank Payment Pending",
             -4 => "Bank Canceled",
             -20 => "api key is not send",
             -21 => "empty trans_id param send",
@@ -152,7 +152,9 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
             -24 => "amount incorrect",
             -25 => "trans_id resend and not allow to payment",
             -26 => "Token not send",
-            -30 => "amount less of limite payment",
+            -27 => "order_id incorrect",
+            -30 => "amount less of limit payment",
+            -31 => "fund not found",
             -32 => "callback error",
             -33 => "api_key incorrect",
             -34 => "trans_id incorrect",
@@ -166,12 +168,27 @@ class plgHikashoppaymentNextpay extends hikashopPaymentPlugin
             -42 => "payment system problem",
             -43 => "gateway not found",
             -44 => "response bank invalid",
-            -45 => "payment system deactived",
+            -45 => "payment system deactivated",
             -46 => "request incorrect",
+            -47 => "gateway is deleted or not found",
             -48 => "commission rate not detect",
             -49 => "trans repeated",
             -50 => "account not found",
-            -51 => "user not found"
+            -51 => "user not found",
+            -60 => "email incorrect",
+            -61 => "national code incorrect",
+            -62 => "postal code incorrect",
+            -63 => "postal add incorrect",
+            -64 => "desc incorrect",
+            -65 => "name family incorrect",
+            -66 => "tel incorrect",
+            -67 => "account name incorrect",
+            -68 => "product name incorrect",
+            -69 => "callback success incorrect",
+            -70 => "callback failed incorrect",
+            -71 => "phone incorrect",
+            -72 => "bank not response",
+            -73 => "callback_uri incorrect"
         );
         if (isset($statusCode[$status])) {
             return $statusCode[$error_array];
